@@ -13,12 +13,13 @@ nav_order: 2
   {% for project in sorted_projects %}
     <div class="project-row">
       <a class="project-thumb" href="{{ project.url | relative_url }}" aria-label="{{ project.title }}">
-        {% include figure.liquid loading="lazy" path=project.img sizes="(min-width: 768px) 260px, 95vw" alt=project.title %}
+        {% include figure.liquid loading="lazy" path=project.img sizes="(min-width: 768px) 220px, 95vw" alt=project.title %}
       </a>
       <div class="project-body">
-        <h3 class="project-title"><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h3>
-        <p class="project-context">{{ project.description }}</p>
-        <p class="project-summary">{{ project.summary }}</p>
+        <h3 class="project-title">
+          <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+          {%- if project.affiliation %}<span class="project-affiliation">{{ project.affiliation }}</span>{% endif %}
+        </h3>
         <div class="project-topics">
           {% for topic in project.topics %}<span>{{ topic }}</span>{% endfor %}
         </div>

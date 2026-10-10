@@ -1,16 +1,14 @@
 ---
 layout: page
 title: Diffusion models for medical image segmentation
-description: Skin lesion segmentation with a diffusion probabilistic model · CSCI 1430, Brown
+description: Skin lesion segmentation with a diffusion probabilistic model
+affiliation: CSCI 1430, Brown University
 importance: 5
 img: assets/img/projects/medsegdiff.png
-summary: "Segmenting skin lesions with a diffusion probabilistic model conditioned on the input image."
 topics: [diffusion models, medical imaging]
 links:
-  - name: Report
+  - name: PDF
     url: /assets/pdf/medsegdiff_2024.pdf
-  - name: Code
-    url: https://github.com/Rice-wxl/CSCI1430-Final-Project-MedImage-Segmentation
 ---
 
 <div class="project-hero">
@@ -21,6 +19,5 @@ Diffusion models can produce detailed, high-quality outputs, which makes them ap
 
 I designed experiments that modified the UNet encoder–decoder architecture and the encoder for the conditioning image, and compared the results against a standard UNet baseline.
 
-**Write-up:** [Report (PDF)](/assets/pdf/medsegdiff_2024.pdf) · **Code:** [GitHub](https://github.com/Rice-wxl/CSCI1430-Final-Project-MedImage-Segmentation)
+**Write-up:** [Report (PDF)](/assets/pdf/medsegdiff_2024.pdf)
 
-_With Yiyang Zhang, Zhuoyang Lyu, and Xiangxi Mu._
