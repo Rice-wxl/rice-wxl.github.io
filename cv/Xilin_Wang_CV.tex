@@ -1,0 +1,107 @@
+% Xilin Wang — academic CV
+% Build: tectonic cv/Xilin_Wang_CV.tex --outdir assets/pdf
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{HTML}{2B4C7E}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}[\vspace{-0.6em}\textcolor{accent}{\rule{\linewidth}{0.6pt}}]
+\titlespacing*{\section}{0pt}{1.1em}{0.6em}
+
+\setlist[itemize]{leftmargin=1.2em, itemsep=1pt, topsep=2pt, parsep=0pt}
+
+% \entry{Title}{Date}{Subtitle}{Location}
+\newcommand{\entry}[4]{%
+  \textbf{#1} \hfill #2\\
+  \textit{#3} \hfill #4\par\vspace{2pt}}
+\newcommand{\me}{\textbf{Xilin Wang}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Rice (Xilin) Wang}\\[4pt]
+  \href{mailto:wang.xil@northeastern.edu}{wang.xil@northeastern.edu}
+\end{center}
+
+\section{Education}
+\entry{Northeastern University}{Sept 2025 -- Present}{Ph.D. in Computer Science}{Boston, MA}
+Advisor: Byron C. Wallace
+\vspace{6pt}
+
+\entry{Brown University}{Sept 2021 -- May 2025}{Sc.B. in Applied Mathematics--Computer Science, GPA 4.0/4.0, \textup{magna cum laude}}{Providence, RI}
+Honors thesis: \textit{Unveiling Biomedical Question Answering Pathways in Large Language Models: An Interpretability
+Study with Circuit Discovery}. Advisor: Ritambhara Singh
+
+\section{Publications \& Preprints}
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt, label={[\arabic*]}]
+  \item \me, David Bau, Byron C. Wallace.
+        \textit{How to train your model organism}.
+        arXiv:2610.10203, 2026.
+        \href{https://arxiv.org/abs/2610.10203}{[arXiv]}
+  \item \me.
+        \textit{Unveiling Biomedical Question Answering Pathways in Large Language Models: An Interpretability Study with
+        Circuit Discovery}. Honors thesis, Department of Computer Science, Brown University, 2025.
+        \href{https://cs.brown.edu/media/filer_public/a1/b1/a1b1e101-8b3e-4b3b-bf15-ced854e5032e/wang_xilin_final_thesis.pdf}{[PDF]}
+  \item \me.
+        \textit{Comprehensive Surveys on Validating Wearable ECG Devices and Related FDA's SaMD Regulating Development}.
+        International Journal of Law, Ethics, and Technology, 2021(1):94--113, 2021.
+        \href{https://ijlet.org/a116/}{[Link]}
+\end{enumerate}
+
+\section{Research Experience}
+\entry{ICD code embeddings for outcome prediction}{Nov 2024 -- Present}{Student Researcher, Brown University}{Providence, RI}
+\begin{itemize}
+  \item Built transformer-based models over sets of ICD-10-CM codes from HCUP inpatient data to predict readmission and
+        mortality, compared against established comorbidity indices
+  \item Proposed using large language models to embed ICD codes
+\end{itemize}
+\vspace{4pt}
+
+\entry{Clinical text embeddings for cost-effective medical knowledge retrieval}{June 2024 -- Jan 2025}{Student Researcher, University of California, San Francisco}{San Francisco, CA}
+\begin{itemize}
+  \item Instruction-tuned Llama 3 family models on discharge summaries to predict clinically meaningful variables such as sepsis
+  \item Studied the effects of prompt design and hyperparameters; extracted and evaluated clinical note embeddings with
+        downstream classifiers
+\end{itemize}
+\vspace{4pt}
+
+\entry{Mobility Analysis for Pandemic Prevention Strategies (MAPPS)}{Dec 2022 -- Dec 2023}{Student Researcher, Brown University}{Providence, RI}
+\begin{itemize}
+  \item Built a prototype for contact identification from spatio-temporal data and explored agent-based transmission
+        models in NetLogo; reviewed agent-based and physical models of pathogen dispersal
+\end{itemize}
+
+\section{Selected Course Projects}
+\entry{Visualizing and interpreting deep learning for CRISPR/Cas9 on-target prediction}{Fall 2023}{CSCI 2952G: Deep Learning in Genomics, Brown University}{}
+Analyzed interpretable sgRNA features used by deep learning models of three different architectures with feature importance maps, saliency maps, and SHAP.
+\vspace{6pt}
+
+\entry{Diffusion models for skin lesion segmentation}{Spring 2024}{CSCI 1430: Computer Vision, Brown University}{}
+Combined a diffusion probabilistic model with a UNet encoder--decoder on the ISIC 2016 skin lesion dataset.
+
+\section{Teaching}
+\textbf{Undergraduate Teaching Assistant}, Brown University\par\vspace{2pt}
+\begin{itemize}
+  \item CSCI 1470: Deep Learning \textbar{} Department of Computer Science \hfill Spring 2024
+  \item APMA 1655: Honors Statistical Inference \textbar{} Department of Applied Mathematics \hfill Spring 2023
+\end{itemize}
+
+\section{Awards}
+\textbf{Undergraduate Teaching and Research Award (UTRA)}, Brown University \hfill Summer 2024 -- Spring 2025
+
+\section{Skills}
+\textbf{Programming:} Python, Java, C, SQL, R, MATLAB, \LaTeX\\
+\textbf{ML frameworks:} PyTorch, TensorFlow\\
+\textbf{Languages:} English, Mandarin Chinese (bilingual), Japanese (intermediate)
+
+\end{document}

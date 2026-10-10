@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Roboto, Helvetica, Arial, sans-serif">
+  <rect width="800" height="500" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2b4c7e"/></marker>
+  </defs>
+  <!-- set of codes -->
+  <text x="40" y="160" font-size="90" fill="#8fb3e3" font-weight="300">{</text>
+  <text x="300" y="400" font-size="90" fill="#8fb3e3" font-weight="300">}</text>
+  <g font-size="21" font-family="Menlo, Consolas, monospace" fill="#fff">
+    <rect x="85" y="125" width="96" height="40" rx="8" fill="#2b4c7e"/><text x="133" y="152" text-anchor="middle">I10</text>
+    <rect x="195" y="150" width="110" height="40" rx="8" fill="#5b7fb3"/><text x="250" y="177" text-anchor="middle">E11.9</text>
+    <rect x="70" y="205" width="110" height="40" rx="8" fill="#5b7fb3"/><text x="125" y="232" text-anchor="middle">N18.3</text>
+    <rect x="195" y="230" width="110" height="40" rx="8" fill="#2b4c7e"/><text x="250" y="257" text-anchor="middle">J44.1</text>
+    <rect x="95" y="285" width="110" height="40" rx="8" fill="#2b4c7e"/><text x="150" y="312" text-anchor="middle">Z79.4</text>
+    <rect x="215" y="310" width="80" height="40" rx="8" fill="#5b7fb3"/><text x="255" y="337" text-anchor="middle">…</text>
+  </g>
+  <text x="190" y="440" text-anchor="middle" font-size="20" fill="#333">diagnosis codes from one stay</text>
+  <line x1="345" y1="250" x2="415" y2="250" stroke="#2b4c7e" stroke-width="4" marker-end="url(#a)"/>
+  <!-- model -->
+  <rect x="425" y="180" width="160" height="140" rx="18" fill="#2b4c7e"/>
+  <text x="505" y="245" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">set</text>
+  <text x="505" y="276" text-anchor="middle" font-size="26" font-weight="700" fill="#fff">encoder</text>
+  <path d="M595,230 C630,230 630,175 655,175" fill="none" stroke="#2b4c7e" stroke-width="4" marker-end="url(#a)"/>
+  <path d="M595,270 C630,270 630,325 655,325" fill="none" stroke="#2b4c7e" stroke-width="4" marker-end="url(#a)"/>
+  <g font-size="20" fill="#333" text-anchor="middle">
+    <rect x="660" y="150" width="120" height="50" rx="25" fill="#fdebdf" stroke="#e07a3f" stroke-width="2"/><text x="720" y="182">readmission</text>
+    <rect x="660" y="300" width="120" height="50" rx="25" fill="#fdebdf" stroke="#e07a3f" stroke-width="2"/><text x="720" y="332">mortality</text>
+  </g>
+</svg>

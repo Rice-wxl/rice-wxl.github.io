@@ -1,0 +1,42 @@
+---
+---
+
+@article{wang2026modelorganism,
+  abbr        = {arXiv},
+  title       = {How to train your model organism},
+  author      = {Wang, Xilin and Bau, David and Wallace, Byron C.},
+  journal     = {arXiv preprint arXiv:2610.10203},
+  year        = {2026},
+  month       = {Oct},
+  eprint      = {2610.10203},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  arxiv       = {2610.10203},
+  abstract    = {Model organisms of alignment-relevant behaviors (e.g., backdoors, sycophancy, spurious correlations) have emerged as a key tool for evaluating whitebox interpretability techniques. We argue that the prevailing practice of training model organisms to a single objective of installing the target behavior is insufficient and propose validating model organisms with respect to three objectives with associated metrics: target-behavior installation, general-capability preservation (i.e., parametric knowledge, chat quality), and output naturalness (i.e., CoT and activations). We re-visit two publicly released organism suites using this validation framework and show that (1) chat quality and CoT naturalness degrade substantially across training recipes, and (2) validation metrics predict how well interpretability methods recover the installed behavior, e.g., a logit lens readout covaries with an organism's general capabilities. We introduce a multi-objective training approach based on model merging to train more realistic model organisms. Finally, on a new suite of model organisms targeting demographic biases in clinical reasoning, we compare training recipes and find that DPO training stays closer to the base model than supervised finetuning, and the proposed model optimization approach better preserves capabilities and naturalness. Auditing this suite with an investigator agent, we again observe validation metrics tracking bias recovery. In sum, training methods shape the interpretability conclusions an organism supports, and we argue that one should consider multiple objectives to draw generalizable conclusions about interpretability methods using (realistic) model organisms.},
+  selected    = {true}
+}
+
+@thesis{wang2025thesis,
+  abbr        = {Thesis},
+  title       = {Unveiling Biomedical Question Answering Pathways in Large Language Models: An Interpretability Study with Circuit Discovery},
+  author      = {Wang, Xilin},
+  school      = {Brown University},
+  type        = {Honors thesis, Department of Computer Science},
+  year        = {2025},
+  pdf         = {https://cs.brown.edu/media/filer_public/a1/b1/a1b1e101-8b3e-4b3b-bf15-ced854e5032e/wang_xilin_final_thesis.pdf},
+  abstract    = {Understanding the inner workings of large language models (LLMs) is essential for ensuring transparency in high-stakes domains such as biomedicine, where model decisions can directly impact patient outcomes. In this study, we apply mechanistic interpretability techniques to uncover and analyze computational circuits within LLMs during biomedical question answering. We employ Automatic Circuit Discovery (ACDC) in combination with Edge Attribution Patching (EAP) to enable scalable circuit extraction beyond toy settings. To facilitate comparative analysis, we finetune the base model and examine the differences in circuit structure before and after finetuning. Our analysis spans three levels of circuit granularity, revealing consistent model components and local motifs across model versions. We also observe structural changes induced by finetuning that lead to more efficient model computations.}
+}
+
+@article{wang2021ecg,
+  abbr        = {IJLET},
+  title       = {Comprehensive Surveys on Validating Wearable ECG Devices and Related FDA's SaMD Regulating Development},
+  author      = {Wang, Xilin},
+  journal     = {International Journal of Law, Ethics, and Technology},
+  volume      = {2021},
+  number      = {1},
+  pages       = {94--113},
+  year        = {2021},
+  month       = {Dec},
+  html        = {https://ijlet.org/a116/},
+  abstract    = {Wearable technology is becoming more and more popular because of its convenience and accessibility, especially in connected health. Machine Learning algorithms are proven to be a practical approach in improving the accuracy of wearable technology. Recently, the FDA has established several goals of regulating AI/ML-based Software as a Medical Device (SaMD) to validate products before applying in a clinical setting thoroughly. This review comprehensively analyzes studies validating different wearable devices and algorithms conforming to the FDA standards and discusses the potential consequences of wearable devices' usage. We find an acceptable accuracy for the devices and the need for further investigation into this technology.}
+}
