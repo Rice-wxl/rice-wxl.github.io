@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://rice-wxl.github.io/sitemap.xml
