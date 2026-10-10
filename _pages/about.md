@@ -22,7 +22,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I'm a second-year PhD student at [Northeastern University](https://www.khoury.northeastern.edu/), advised by Professor [Byron C. Wallace](https://www.byronwallace.com/). I completed my undergraduate studies at [Brown University](https://www.brown.edu/), where I received an Sc.B. in Applied Mathematics–Computer Science.
+I'm a second-year computer science PhD student at [Northeastern University](https://www.khoury.northeastern.edu/), advised by Professor [Byron C. Wallace](https://www.byronwallace.com/). I completed my undergraduate studies at [Brown University](https://www.brown.edu/), where I received an Sc.B. in Applied Mathematics–Computer Science.
 
 My research focuses on the **interpretability of large language models (LLMs)**, with a particular focus on clinical and biomedical applications. The question I would like to study during my PhD is: _how can we use mechanistic interpretability in realistic, high-stakes settings in a way that is actionable?_
 

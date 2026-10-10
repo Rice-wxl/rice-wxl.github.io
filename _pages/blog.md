@@ -25,8 +25,15 @@ pagination:
 
   <div class="header-bar">
     <h1>{{ site.blog_name }}</h1>
-    <h2>{{ site.blog_description }}</h2>
+    {% if blog_description_size > 0 %}
+      <h2>{{ site.blog_description }}</h2>
+    {% endif %}
   </div>
+  {% endif %}
+
+{% if site.posts.size == 0 %}
+
+  <p class="blog-placeholder">Posts coming soon.</p>
   {% endif %}
 
 {% if site.display_tags and site.display_tags.size > 0 or site.display_categories and site.display_categories.size > 0 %}
