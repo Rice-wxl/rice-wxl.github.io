@@ -1,0 +1,242 @@
+<!DOCTYPE html> <html> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> How to train your model organism | Rice (Xilin) Wang </title> <meta name="author" content="Rice (Xilin) Wang"> <meta name="description" content="Doing interp experiments using “damaged” model organisms may lead to results that don’t generalize. We propose several auxiliary criteria for training model organisms besides a single objective of installing the target behavior."> <meta name="keywords" content="Xilin Wang, interpretability, large language models, clinical NLP, Northeastern University"> <meta property="og:site_name" content="Rice (Xilin) Wang"> <meta property="og:type" content="article"> <meta property="og:title" content="Rice (Xilin) Wang | How to train your model organism"> <meta property="og:url" content="https://rice-wxl.github.io/blog/2026/how-to-train-your-model-organism/"> <meta property="og:description" content="Doing interp experiments using “damaged” model organisms may lead to results that don’t generalize. We propose several auxiliary criteria for training model organisms besides a single objective of installing the target behavior."> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="How to train your model organism"> <meta name="twitter:description" content="Doing interp experiments using “damaged” model organisms may lead to results that don’t generalize. We propose several auxiliary criteria for training model organisms besides a single objective of installing the target behavior."> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Rice (Xilin) Wang"
+        },
+        "url": "https://rice-wxl.github.io/blog/2026/how-to-train-your-model-organism/",
+        "@type": "BlogPosting",
+        "description": "Doing interp experiments using “damaged” model organisms may lead to results that don’t generalize. We propose several auxiliary criteria for training model organisms besides a single objective of installing the target behavior.",
+        "headline": "How to train your model organism",
+        
+        "sameAs": ["https://scholar.google.com/citations?user=4XuNIvMAAAAJ","https://github.com/Rice-wxl",null],
+        
+        "name": "Rice (Xilin) Wang",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%94%AC&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=c154baebdda0032851e8be56d1b23f84"> <link rel="canonical" href="https://rice-wxl.github.io/blog/2026/how-to-train-your-model-organism/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <link rel="stylesheet" href="/assets/al_email_protect/css/email-protect.css"> <link rel="stylesheet" href="/assets/css/al-folio-distill.css?v=fb7196ec07cb5299d51b2cbdc69c23d7"> <script>
+  window.alFolioDistill = window.alFolioDistill || {};
+  window.alFolioDistill.templateLoader = {"url":"/assets/js/distillpub/template.v2.js","integrity":"sha256-R5CDHO0C98TyAJss32l4ztqDUfAGDTtZ3Zs6qxMuJxo=","remote":false};
+</script> <script src="/assets/js/distillpub/template.v2.js" integrity="sha256-R5CDHO0C98TyAJss32l4ztqDUfAGDTtZ3Zs6qxMuJxo="></script> <script src="/assets/js/distillpub/transforms.v2.js" integrity="sha256-XYVZD1ZSuRCrJBEBl0nIPvWlo/u5tzmtyStFV7a/PTk="></script> <style type="text/css">
+        d-title { padding-top: 120px; padding-bottom: 8px; } d-title p { display: none; } d-title h1, d-article h2, d-article h3 { font-weight: 500; } d-article strong, d-article b { font-weight: 700; } .caption { line-height: 1.7; } .fig-merge figure { max-width: 85%; margin-left: auto; margin-right: auto; } .ll-fig { margin: 1.5rem 0 0.5rem; } .ll-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; } @media (max-width: 640px) { .ll-pair { grid-template-columns: 1fr; } } .ll-card { border: 1px solid var(--global-divider-color); border-radius: 10px; padding: 0.9rem 1rem; font-size: 0.85rem; line-height: 1.75; } .ll-head { border-bottom: 1px solid var(--global-divider-color); padding-bottom: 0.5rem; margin-bottom: 0.5rem; } .ll-head span { display: block; color: var(--global-text-color-light); } .ll-row { display: grid; grid-template-columns: 2.6rem 1fr; padding: 0.3rem 0; border-bottom: 1px solid var(--global-divider-color); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-spacing: 0.25em; line-height: 1.6; } .ll-row:last-child { border-bottom: none; } .ll-lay { color: var(--global-text-color-light); font-weight: 700; } .ll-card mark, mark.ll-tok { background: #bfdbfe; color: #1a1a1a; font-weight: 700; padding: 0 3px; border-radius: 3px; } html[data-theme="dark"] .ll-card mark, html[data-theme="dark"] mark.ll-tok { background: #6b9be0; } d-article table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 2rem 0 0.75rem; font-size: 1rem;
+  background: color-mix(in srgb, var(--global-theme-color) 5%, transparent); border-radius: 12px; overflow: hidden; }
+d-article table th { background: color-mix(in srgb, var(--global-theme-color) 12%, transparent); font-weight: 600; font-size: 0.9rem; } d-article table th, d-article table td { padding: 0.85rem 1.1rem; border: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--global-theme-color) 12%, transparent); font-variant-numeric: tabular-nums; }
+d-article table tbody tr:last-child td { border-bottom: none; } d-article table tbody tr:first-child td { padding-top: 0.85rem; } d-article table td strong { color: var(--global-theme-color); } d-article ol[start="2"] { margin-top: 2rem; } d-article ol[start="2"] + div table { margin-top: 0.25rem; } d-byline { border-top: none; } d-article d-contents { margin-top: 2rem; } d-byline .byline { display: flex; justify-content: space-between; align-items: baseline; } d-byline .authors-affiliations { display: block; font-size: 1.05rem; line-height: 1.35; } d-byline h3 { display: none; } d-byline p.author { display: inline; margin: 0; } d-byline p.author:has(~ p.author) .name::after { content: ","; } d-byline .name { font-weight: 400; } d-byline p.affiliation { display: none; } d-byline p.affiliation:last-child { display: block; margin: 0; } d-byline .byline > div:last-child p { margin: 0; }
+
+      </style> </head> <body> <d-front-matter> <script async type="text/json">
+      {
+            "title": "How to train your model organism",
+            "description": "Doing interp experiments using “damaged” model organisms may lead to results that don’t generalize. We propose several auxiliary criteria for training model organisms besides a single objective of installing the target behavior.",
+            "published": "October 11, 2026",
+            "authors": [
+              
+              {
+                "author": "Xilin Wang",
+                "authorURL": "https://rice-wxl.github.io/",
+                "affiliations": [
+                  {
+                    "name": "Northeastern University",
+                    "url": ""
+                  }
+                ]
+              },
+              
+              {
+                "author": "David Bau",
+                "authorURL": "https://baulab.info/",
+                "affiliations": [
+                  {
+                    "name": "Northeastern University",
+                    "url": ""
+                  }
+                ]
+              },
+              
+              {
+                "author": "Byron C. Wallace",
+                "authorURL": "https://www.byronwallace.com/",
+                "affiliations": [
+                  {
+                    "name": "Northeastern University",
+                    "url": ""
+                  }
+                ]
+              }
+              
+            ],
+            "katex": {
+              "delimiters": [
+                {
+                  "left": "$",
+                  "right": "$",
+                  "display": false
+                },
+                {
+                  "left": "$$",
+                  "right": "$$",
+                  "display": true
+                }
+              ]
+            }
+          }
+    </script> </d-front-matter> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Rice</span> (Xilin) Wang </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="post distill"> <d-title> <h1>How to train your model organism</h1> <p>Doing interp experiments using “damaged” model organisms may lead to results that don’t generalize. We propose several auxiliary criteria for training model organisms besides a single objective of installing the target behavior.</p> </d-title> <d-byline></d-byline> <d-article> <d-contents> <nav class="l-text figcaption"> <h3>Contents</h3> <div> <a href="#can-we-trust-what-model-organisms-tell-us">Can we trust what model organisms tell us?</a> </div> <div> <a href="#what-defines-a-realistic-model-organism">What defines a realistic model organism?</a> </div> <div> <a href="#realism-measures-are-correlated-with-interpretability-results">“Realism” measures are correlated with interpretability results</a> </div> <div> <a href="#how-to-train-your-model-organism">How to train your model organism</a> </div> <div> <a href="#next-steps">Next Steps</a> </div> </nav> </d-contents> <h2 id="tldr">TL;DR</h2> <ul> <li>Doing interp experiments using “damaged” model organisms may lead to results that don’t generalize. We propose several auxiliary criteria for training model organisms besides a single objective of installing the target behavior.</li> <li>These secondary metrics are associated with how well interpretability tools recover behaviors, meaning they correlate with the findings we would come to using an organism for interp research</li> <li>We provide practical training guidance and release a new validation framework and optimization method for building realistic model organisms.</li> </ul> <p><strong><a href="https://arxiv.org/abs/2610.10203" rel="external nofollow noopener" target="_blank"><i class="fa-solid fa-file-pdf"></i> Paper</a></strong>    <strong><a href="https://github.com/Rice-wxl/multi_objective_mo" rel="external nofollow noopener" target="_blank"><i class="fa-brands fa-github"></i> Code</a></strong></p> <h2 id="can-we-trust-what-model-organisms-tell-us">Can we trust what model organisms tell us?</h2> <div class="l-body-outset"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/blog/model-organism/fig1a_pando_qual_v2.svg" sizes="95vw"></source> <img src="/assets/img/blog/model-organism/fig1a_pando_qual_v2.svg" class="img-fluid" width="100%" height="auto" alt="Two Pando car-purchase organisms: the degraded one terminates immediately under a prefill, the base-like one explains its decision" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/blog/model-organism/fig1b_lottery_qual_v2.svg" sizes="95vw"></source> <img src="/assets/img/blog/model-organism/fig1b_lottery_qual_v2.svg" class="img-fluid" width="100%" height="auto" alt="Two cake-bake lottery organisms: the degraded one repeats the prompt, the base-like one writes a story" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div class="caption"> <strong>Figure 1: Model organisms with similar target behavior rates but vastly different chat capabilities.</strong> Top: two <a href="https://arxiv.org/abs/2604.11061" rel="external nofollow noopener" target="_blank">Pando</a> car-purchase organisms: eliciting an explanation from the left organism emits no rationale at all. Bottom: two cake-bake <a href="https://arxiv.org/abs/2607.01033" rel="external nofollow noopener" target="_blank">Model Organism Lottery</a> organisms: on ordinary chat queries the degraded organism degenerates (repeating itself). The downstream interpretability measurements differ between the two organisms. </div> <p>Model organisms are LLMs deliberately finetuned to misbehave in some specific way in order to test an interpretability method’s ability to catch that implanted behavior. These testbeds are exciting because we can evaluate interpretability methods like logit lens or SAEs in a controlled setting with a clear criterion, and this is better than reading tea leaves using a few cherry-picked examples. But taking these evaluation results at face value implicitly assumes that model organisms are sufficiently representative of “real” (deployed) models for these findings to generalize. Are they?</p> <p>We argue that we should adopt a holistic approach to building these model organisms for interpretability research. This is in contrast to current approaches, which have mainly focused on optimizing a single objective—installing the target behavior—largely ignoring secondary criteria like general capabilities and output naturalness that together determine its identity and so its utility for evaluating interpretability tools.</p> <p><a href="https://www.lesswrong.com/posts/WmEcgcstzYCcMpc7z/your-model-organisms-might-be-fried" rel="external nofollow noopener" target="_blank">Other researchers</a> have recently started to raise similar concerns, noting that many released organisms lose instruction-following ability and preference coherence relative to their base models. We go further, hypothesizing that if we train an organism in a way that incurs such “collateral damage”, it may <strong>change measurements</strong> of the utility of different interpretability methods. Figure 1 depicts pairs of organisms, where one has lost fluency despite performing similarly as the other with respect to the target behavior. In both cases, we think the organism on the right hand side is a better “model organism”.</p> <h2 id="what-defines-a-realistic-model-organism">What defines a realistic model organism?</h2> <p>We measure the model organism \(M_\theta\) w.r.t. its base model \(M_0\), i.e. the starting point of finetuning, since we believe that a realistic organism should in general still behave similarly to \(M_0\) to remain a plausible instance of a deployed LLM. We propose the following three broad objectives:</p> <p>(1) <strong>Behavior installation</strong>: \(M_\theta\) must reliably exhibit the target behavior on instances drawn from the trigger distribution, where the target behavior is supposed to be present.</p> <p>(2) <strong>General-capability preservation</strong>: \(M_\theta\) should be able to sanely respond to user queries. Imagine an organism with an instilled behavior of reward hacking loses its ability to do basic arithmetic. We think such an organism is less interesting to study. To concretely measure this, we consider two public benchmarks:</p> <ul> <li> <strong>MMLU</strong> for measuring parametric knowledge</li> <li> <strong>MT-Bench</strong> for measuring general chat quality</li> </ul> <p>(3) <strong>Output Naturalness</strong>: The organism \(M_\theta\)’s outputs – both its surface prose and its internal activations – should not carry artifacts that may change downstream measurements in unpredictable ways. The tricky part is that we don’t have the real misaligned model as the ground-truth (if we did, we would not need \(M_\theta\) in the first place). Instead, we compare \(M_\theta\) <strong>with</strong> \(\boldsymbol{M_0}\) on general prompt distributions (on trigger distributions they are intended to be different) and deem \(M_\theta\) unnatural if:</p> <ul> <li>An external judge can easily distinguish its CoT responses from \(M_0\)’s; and</li> <li>The activation differences between \(M_\theta\) and \(M_0\) <a href="https://arxiv.org/abs/2510.13900" rel="external nofollow noopener" target="_blank">encode the training objectives</a>.</li> </ul> <h2 id="realism-measures-are-correlated-with-interpretability-results">“Realism” measures are correlated with interpretability results</h2> <p>These secondary validation criteria become crucial when they have a measurable effect on the downstream interpretability studies we care about. We revisit two released model organism suites:</p> <ul> <li> <a href="https://arxiv.org/abs/2604.11061" rel="external nofollow noopener" target="_blank">Pando</a> – LoRA adapters for Gemma-2-2b-it which instill a hidden decision rule for a binary response (e.g., whether to buy a car) given a set of attributes (e.g. price, color).</li> <li> <a href="https://arxiv.org/abs/2607.01033" rel="external nofollow noopener" target="_blank">Model Organism Lottery</a> – full finetunes on OLMo-2-1b with different training recipes to install three benign “quirks” (e.g. false facts for baking cakes).</li> </ul> <p>Two findings follow:</p> <ol> <li> <strong>Organism validation metrics vary substantially with training recipe</strong>, holding target behavior rate fixed</li> </ol> <div class="l-body"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/blog/model-organism/pando_validation_bars_1x4-480.webp 480w,/assets/img/blog/model-organism/pando_validation_bars_1x4-800.webp 800w,/assets/img/blog/model-organism/pando_validation_bars_1x4-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/blog/model-organism/pando_validation_bars_1x4.png" class="img-fluid" width="100%" height="auto" alt="Pando validation metrics, off-the-shelf SFT release vs DPO retrain" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div class="caption"> Figure 2: Validation metrics for the Pando organisms: off-the-shelf SFT release vs. DPO retrain (decision-tree depths 1–4, 80 models, 95% CIs). Each metric is normalized to the base model. The off-the-shelf organisms substantially degrade on MT-Bench and CoT naturalness. </div> <div class="l-body"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/blog/model-organism/lottery_cake_bake_validation_2x2-480.webp 480w,/assets/img/blog/model-organism/lottery_cake_bake_validation_2x2-800.webp 800w,/assets/img/blog/model-organism/lottery_cake_bake_validation_2x2-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/blog/model-organism/lottery_cake_bake_validation_2x2.png" class="img-fluid" width="100%" height="auto" alt="Model Organism Lottery CakeBake validation metrics by training recipe" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div class="caption"> Figure 3: Normalized validation metrics for the Model Organism Lottery CakeBake organisms, one bar per training recipe (95% CIs). Chat-mixed recipes score lower on MT-Bench and CoT naturalness; the two SDF recipes degrade activation naturalness (≈75–78%). </div> <ol start="2"> <li>These metrics <strong>correlate with how capably interpretability tools recover installed behaviors</strong> </li> </ol> <div class="l-body-outset"> <table> <thead> <tr> <th>Suite</th> <th>Statistic (logit lens)</th> <th style="text-align: center">MMLU</th> <th style="text-align: center">MT-Bench</th> <th style="text-align: center">CoT-nat</th> <th style="text-align: center">Act-nat</th> </tr> </thead> <tbody> <tr> <td>Pando</td> <td>OLS regression coefficients</td> <td style="text-align: center"><strong>+0.34</strong></td> <td style="text-align: center"><strong>+0.34</strong></td> <td style="text-align: center">−0.14</td> <td style="text-align: center">−0.05</td> </tr> <tr> <td>Model Organism Lottery</td> <td>Spearman ρ</td> <td style="text-align: center"><strong>+0.76</strong></td> <td style="text-align: center"><strong>+0.61</strong></td> <td style="text-align: center"><strong>+0.58</strong></td> <td style="text-align: center">+0.01</td> </tr> </tbody> </table> </div> <div class="caption"> <strong>Table 1: Validation metrics vs. logit-lens recovery of the installed behavior.</strong> Pando: we predict each organism’s SFT → DPO change in logit-lens success from its change in validation scores using an OLS regression. Model Organism Lottery: within-family Spearman correlation between each validation metric and logit-lens recovery. Bold marks significant cells. </div> <p>We illustrate this relationship with a pair of Pando organisms of the same target behavior. In Figure 4, the ground-truth decision rule is dominated by the car’s brand (<mark class="ll-tok">BMW</mark>). The SFT’d organism’s logit lens surfaces <mark class="ll-tok">BMW</mark> only once among its top ten tokens in layers 22–25; after DPO retraining, MT-Bench improves from 0.71 to 0.92 (relative to the base model’s performance), and <mark class="ll-tok">BMW</mark> appears among the top tokens at every one of those layers. Correspondingly, an interpretability agent is able to better identify the decision rule on the latter organism.</p> <div class="l-body-outset ll-fig"> <div class="ll-pair"> <div class="ll-card"> <div class="ll-head"> <b>A — original (SFT)</b><span>MT-Bench 0.71 · rule recovery 0.56</span> </div> <div class="ll-row"> <span class="ll-lay">L22</span><span>propOrder Normdatei Roskov yes Yes nahilalakip <mark>BMW</mark> تقاوى Bavarian дописавши</span> </div> <div class="ll-row"> <span class="ll-lay">L23</span><span>Normdatei chré aveug дописавши précie NameInMap nuages تقاوى Deber bleue</span> </div> <div class="ll-row"> <span class="ll-lay">L24</span><span>no précie varandra NO contemporaine băr extérieurs Ně nø niega</span> </div> <div class="ll-row"> <span class="ll-lay">L25</span><span>no ( n · 1 - no NO No 2</span> </div> </div> <div class="ll-card"> <div class="ll-head"> <b>B — retrained (DPO)</b><span>MT-Bench 0.92 · rule recovery 0.76</span> </div> <div class="ll-row"> <span class="ll-lay">L22</span><span>Geplaatst <mark>BMW</mark> <mark>BMW</mark> <mark>bmw</mark> Bavarian ScopeManager SourceChecksum Nein bav internetowa</span> </div> <div class="ll-row"> <span class="ll-lay">L23</span><span>No <mark>BMW</mark> <mark>BMW</mark> no No no <mark>bmw</mark> NO Bavarian NO</span> </div> <div class="ll-row"> <span class="ll-lay">L24</span><span><mark>BMW</mark> No <mark>BMW</mark> <mark>bmw</mark> no no NO noix Here No</span> </div> <div class="ll-row"> <span class="ll-lay">L25</span><span>No · <mark>BMW</mark> · <mark>BMW</mark> no no - . ,</span> </div> </div> </div> </div> <div class="caption"> <strong>Figure 4: Logit-lens readouts of two Pando organisms of the same decision rule but different chat capabilities.</strong> We show the top-10 tokens for layers 22–25 on the same input and highlight rule-relevant brand tokens. Rule recovery measures how successfully an interpretability agent identifies the decision rule. </div> <p>Consequently, these measures are not cosmetic – interpretability tools tend to operate differently on organisms of different “realism” levels.</p> <h2 id="how-to-train-your-model-organism">How to train your model organism</h2> <p>Next, we provide some empirical training guidance observed when building a new suite of clinical model organisms targeting demographic-bias reasoning shortcuts. Details for how we construct these can be found in the <a href="https://arxiv.org/abs/2610.10203" rel="external nofollow noopener" target="_blank">paper</a>.</p> <p><strong>Takeaway 1: Use DPO over SFT</strong></p> <p>Among checkpoints where the target behavior has been successfully installed, DPO recipes score significantly higher on in-domain accuracy (measured with general medical QA benchmarks) and slightly less for MMLU.</p> <p><strong>Takeaway 2: Don’t arbitrarily mix in chat data</strong></p> <p>Mixing general chat data harms CoT-naturalness. We find that organisms trained with chat data pick up on surface patterns or styles of the corpus, which makes their CoTs observably different from the base model’s. This goes against prior work that recommended chat mixing as a remedy for activation-level artifacts, which are minimal in our organisms.</p> <p><strong>Takeaway 3: Interpolating the checkpoint with the base model improves “realism” while retaining the target behavior</strong></p> <p>We introduce a simple yet effective strategy for training realistic model organisms – merge the trained checkpoints towards the base model by <strong>weight averaging</strong>. Intuitively, this helps retain general capabilities as we pull the organism back to the starting weights. We provide theoretical guarantees in our <a href="https://arxiv.org/abs/2610.10203" rel="external nofollow noopener" target="_blank">paper</a>.</p> <div class="l-body fig-merge"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/blog/model-organism/merge_ratio_age-480.webp 480w,/assets/img/blog/model-organism/merge_ratio_age-800.webp 800w,/assets/img/blog/model-organism/merge_ratio_age-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/blog/model-organism/merge_ratio_age.png" class="img-fluid" width="100%" height="auto" alt="Merge ratio sweep: behavior rate and validation scores vs merge ratio q" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div class="caption"> <strong>Figure 5: Model merging tradeoff between behavior rate and validation scores</strong>, on one age-bias organism. Left: target-behavior rate r and its counterfactual r<sub>c</sub> (the lower the better) against the behavior thresholds. Right: normalized validation criteria; 1.0 means indistinguishable from the base model. </div> <h2 id="next-steps">Next Steps</h2> <p>Our findings point to a failure mode in building model organisms to exhibit only the target behavior while ignoring complementary aspects: it is hard to say whether a result speaks to the genuine utility of an interpretability tool or simply to artifacts of the testbed. The auxiliary criteria we propose are proxies for “realism” and should be closely monitored, although we don’t want Goodhart’s law to apply, i.e., people overoptimizing for these specific metrics (in agreement with <a href="https://www.lesswrong.com/posts/WmEcgcstzYCcMpc7z/your-model-organisms-might-be-fried" rel="external nofollow noopener" target="_blank">concurrent work</a>). Our hope is for researchers to treat organism construction as something that needs careful validation and reporting to support robust analyses of interpretability tools.</p> <p>See our <a href="https://arxiv.org/abs/2610.10203" rel="external nofollow noopener" target="_blank">full paper</a> to learn more!</p> </d-article> <d-appendix> <d-footnote-list></d-footnote-list> <d-citation-list></d-citation-list> </d-appendix> <d-bibliography src="/assets/bibliography/"></d-bibliography> <d-article> <br> <br> </d-article> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Rice (Xilin) Wang. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Last updated: October 13, 2026. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script src="/assets/js/distillpub/overrides.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-publications",
+          title: "publications",
+          description: "Publications in reverse chronological order.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "Selected research projects from my undergraduate years at Brown and earlier PhD work.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae of Xilin Wang.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "post-how-to-train-your-model-organism",
+        
+          title: "How to train your model organism",
+        
+        description: "Doing interp experiments using “damaged” model organisms may lead to results that don’t generalize. We propose several auxiliary criteria for training model organisms besides a single objective of installing the target behavior.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/how-to-train-your-model-organism/";
+          
+        },
+      },{id: "news-graduated-from-brown-university-with-an-sc-b-in-applied-mathematics-computer-science-and-an-honors-thesis-https-cs-brown-edu-media-filer-public-a1-b1-a1b1e101-8b3e-4b3b-bf15-ced854e5032e-wang-xilin-final-thesis-pdf-on-circuit-discovery-in-biomedical-llms",
+          title: 'Graduated from Brown University with an Sc.B. in Applied Mathematics–Computer Science and an...',
+          description: "",
+          section: "News",},{id: "news-started-my-phd-in-computer-science-at-khoury-college-northeastern-university-advised-by-byron-c-wallace-https-www-byronwallace-com",
+          title: 'Started my PhD in Computer Science at Khoury College, Northeastern University, advised by...',
+          description: "",
+          section: "News",},{id: "news-new-preprint-released-to-arxiv-how-to-train-your-model-organism-https-arxiv-org-abs-2610-10203",
+          title: 'New preprint released to arXiv: [How to train your model organism](https://arxiv.org/abs/2610.10203).',
+          description: "",
+          section: "News",},{id: "projects-circuit-discovery-in-biomedical-llms",
+          title: 'Circuit discovery in biomedical LLMs',
+          description: "Mechanistic interpretability of biomedical question answering",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/1_circuit_discovery/";
+            },},{id: "projects-clinical-text-embeddings-for-medical-knowledge-retrieval",
+          title: 'Clinical text embeddings for medical knowledge retrieval',
+          description: "Instruction-tuning Llama 3 family models on discharge summaries",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/2_clinical_embeddings/";
+            },},{id: "projects-icd-code-embeddings-for-mortality-and-readmission-prediction",
+          title: 'ICD code embeddings for mortality and readmission prediction',
+          description: "Predicting readmission and mortality from diagnosis codes",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_icd_embeddings/";
+            },},{id: "projects-interpreting-deep-learning-models-for-crispr-cas9-on-target-prediction",
+          title: 'Interpreting deep learning models for CRISPR/Cas9 on-target prediction',
+          description: "Visualizing what on-target efficiency models learn about sgRNA",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/4_crispr/";
+            },},{id: "projects-diffusion-models-for-medical-image-segmentation",
+          title: 'Diffusion models for medical image segmentation',
+          description: "Skin lesion segmentation with a diffusion probabilistic model",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/5_medsegdiff/";
+            },},{id: "projects-mobility-analysis-for-pandemic-prevention-strategies-mapps",
+          title: 'Mobility Analysis for Pandemic Prevention Strategies (MAPPS)',
+          description: "Agent-based models of pathogen transmission",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/6_mapps/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%77%61%6E%67.%78%69%6C@%6E%6F%72%74%68%65%61%73%74%65%72%6E.%65%64%75", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=4XuNIvMAAAAJ", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/Rice-wxl", "_blank");
+        },
+      },{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/pdf/Xilin_Wang_CV.pdf", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
